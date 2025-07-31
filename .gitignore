@@ -30,11 +30,12 @@ node_modules/
 /dist/
 /build/
 /target/
+google-chrome-stable_current_amd64.deb
 
 # Ignore secrets and credentials
 secrets.yaml
 config/credentials.yml
 
-# Peronsal files
+# Personal files
 .env
 *.pdf
