@@ -115,13 +115,18 @@ def obtener_precio(driver, url:str) -> float:
 
     # Buscar el precio
     try:
-        price_element = wait.until(
-            EC.presence_of_element_located((By.CLASS_NAME, 'aok-offscreen')))
+        price_element = wait.until(EC.presence_of_element_located((By.CLASS_NAME, 'a-offscreen')))
         price_text = price_element.get_attribute("textContent").strip()
         price = float(price_text.replace('$', '').replace(',', ''))
 
     except:
-        print("❌ No se encontró el elemento del precio")
-        price = None
+        try:
+            price_element = wait.until(EC.presence_of_element_located((By.CLASS_NAME, 'aok-offscreen')))
+            price_text = price_element.get_attribute("textContent").strip()
+            price = float(price_text.replace('$', '').replace(',', ''))
+
+        except:
+            print("❌ No se encontró el elemento del precio")
+            price = None
     
     return product_name, price
