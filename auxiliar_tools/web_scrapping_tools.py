@@ -79,6 +79,8 @@ def configurar_driver(directorio_descarga:str = None) -> webdriver.Chrome:
     chrome_options.add_argument("--disable-logging")  # Desactivar logs de DevTools
     chrome_options.add_argument("--start-maximized")
     chrome_options.add_argument("--log-level=3")
+    chrome_options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/117.0.0.0 Safari/537.36")
+
 
     # Iniciar el driver usando webdriver-manager para instalar ChromeDriver automáticamente
     driver = webdriver.Chrome(
