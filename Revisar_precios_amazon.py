@@ -47,10 +47,6 @@ for index, row in prices_df.iterrows():
     min_price = row['min_price']
     actual_price = row['actual_price']
 
-    print('\n' + '-'*50)
-    print(url)
-    print('\n')
-
     try:
         # Obtener el precio del producto
         nombre, precio = obtener_precio(driver, url)
