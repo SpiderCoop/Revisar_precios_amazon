@@ -43,11 +43,13 @@ prices_df = pd.read_csv('prices_data.csv')
 notificar = False
 productos_en_oferta = {}
 for index, row in prices_df.iterrows():
-    url = row['url']
+    url = row['url'].strip()
     min_price = row['min_price']
     actual_price = row['actual_price']
 
+    print('\n' + '-'*50)
     print(url)
+    print('\n')
 
     try:
         # Obtener el precio del producto
@@ -73,6 +75,9 @@ for index, row in prices_df.iterrows():
 
     except:
         pass
+
+# Cerrar el driver
+driver.quit()
 
 # Guardar los cambios en el DataFrame
 prices_df.to_csv('prices_data.csv', index=False)

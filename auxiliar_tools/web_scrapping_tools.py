@@ -78,6 +78,7 @@ def configurar_driver(directorio_descarga:str = None) -> webdriver.Chrome:
     chrome_options.add_argument("--disable-extensions")
     chrome_options.add_argument("--disable-logging")  # Desactivar logs de DevTools
     chrome_options.add_argument("--start-maximized")
+    chrome_options.add_argument("--log-level=3")
 
     # Iniciar el driver usando webdriver-manager para instalar ChromeDriver automáticamente
     driver = webdriver.Chrome(
@@ -93,36 +94,34 @@ def obtener_precio(driver, url:str) -> float:
     Obtiene el precio de un producto en Amazon utilizando Selenium.
     """
 
+    # Navegar a la URL del producto
     try:
-        # Navegar a la URL del producto
         driver.get(url)
         wait = WebDriverWait(driver, 10)
 
-        # Buscar el titulo del producto
-        try:
-            product_element = wait.until(EC.presence_of_element_located((By.ID, 'productTitle')))
-            product_name = product_element.get_attribute("textContent").strip()
-
-        except:
-            print("❌ No se encontró el elemento del nombre")
-            product_name = None
-
-
-        # Buscar el precio
-        try:
-            price_element = wait.until(
-                EC.presence_of_element_located((By.CLASS_NAME, 'aok-offscreen')))
-            price_text = price_element.get_attribute("textContent").strip()
-            price = float(price_text.replace('$', '').replace(',', ''))
-
-        except:
-            print("❌ No se encontró el elemento del precio")
-            price = None
-            
     except:
         print("❌ No se pudo acceder a la página del producto o el formato ha cambiado.")
-    
-    finally:
-        driver.quit()
+        return None, None
+
+    # Buscar el titulo del producto
+    try:
+        product_element = wait.until(EC.presence_of_element_located((By.ID, 'productTitle')))
+        product_name = product_element.get_attribute("textContent").strip()
+
+    except:
+        print("❌ No se encontró el elemento del nombre")
+        product_name = None
+
+
+    # Buscar el precio
+    try:
+        price_element = wait.until(
+            EC.presence_of_element_located((By.CLASS_NAME, 'aok-offscreen')))
+        price_text = price_element.get_attribute("textContent").strip()
+        price = float(price_text.replace('$', '').replace(',', ''))
+
+    except:
+        print("❌ No se encontró el elemento del precio")
+        price = None
     
     return product_name, price
