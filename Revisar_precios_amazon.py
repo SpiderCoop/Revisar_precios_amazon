@@ -15,7 +15,6 @@ import pandas as pd
 from dotenv import load_dotenv
 
 from auxiliar_tools.web_scrapping_tools import configurar_driver, obtener_precio
-from auxiliar_tools.check_logs import revisar_registros_envio
 from auxiliar_tools.mail_tools import enviar_correo
 
 
@@ -79,7 +78,7 @@ for index, row in prices_df.iterrows():
 prices_df.to_csv('prices_data.csv', index=False)
 
 # Enviar notificaciones por correo si hay productos en oferta
-if True:
+if notificar:
 
     cuerpo_correo = ""
     for nombre, precio in productos_en_oferta.items():
