@@ -100,6 +100,7 @@ def obtener_precio(driver, url:str) -> float:
     try:
         driver.get(url)
         wait = WebDriverWait(driver, 10)
+        print("Accediendo a la página del producto:", url)
 
     except:
         print("❌ No se pudo acceder a la página del producto o el formato ha cambiado.")
