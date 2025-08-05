@@ -100,10 +100,6 @@ def obtener_precio(driver, url:str) -> float:
     try:
         driver.get(url)
         wait = WebDriverWait(driver, 10)
-        print("Accediendo a la página del producto:", url)
-        print(driver.current_url)
-        print(driver.page_source[:5000])  # Solo los primeros 5000 caracteres
-        print('\n')
 
 
     except:

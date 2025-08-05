@@ -79,11 +79,11 @@ driver.quit()
 prices_df.to_csv('prices_data.csv', index=False)
 
 # Enviar notificaciones por correo si hay productos en oferta
-if notificar:
+if True:
 
     cuerpo_correo = ""
     for nombre, precio in productos_en_oferta.items():
-        cuerpo_correo += f"El precio de {nombre} ha cambiado. Nuevo precio: ${precio}\n"
+        cuerpo_correo += f'El precio de {nombre} ha cambiado.<br>Nuevo precio: ${precio}<br><br>'
 
     enviar_correo(cuenta=cuenta,
     password=password,
